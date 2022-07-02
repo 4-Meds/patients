@@ -26,9 +26,8 @@ export default {
   async created() {
     // FIXME: Move URL to some config
     const client = FHIR.client("http://localhost:8090/fhir")
-    const res = await client.request("Patient")
-    const items = res.entry.map(e => e.resource)
-    this.items = items;
+    const res = await client.request("Patient", { pageLimit: 10, flat: true })
+    this.items = res
   }
 }
 </script>
